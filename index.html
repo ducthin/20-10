@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trang web chúc mừng ngày phụ nữ Việt Nam 20/10 - Dành tặng người yêu">
+    <meta name="author" content="ducthin">
+    <meta property="og:title" content="Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10">
+    <meta property="og:description" content="Lời chúc đặc biệt dành tặng em yêu">
+    <meta property="og:type" content="website">
+    <title>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(236, 72, 153, 0.5), 0 0 40px rgba(236, 72, 153, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(236, 72, 153, 0.8), 0 0 60px rgba(236, 72, 153, 0.5);
+            }
+        }
+        
+        .fab-show {
+            animation: bounce 1s ease-in-out infinite, glow 2s ease-in-out infinite;
+        }
+        
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            font-size: 24px;
+            color: #ff69b4;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9999;
+            animation: floatHeart 6s ease-in-out infinite;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(-20px) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(-800px) scale(1) rotate(15deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-1000px) scale(0) rotate(30deg);
+            }
+        }
+        
+        /* Loading animation */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader-heart {
+            font-size: 60px;
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        /* Cover Page - Intro Screen */
+        .cover-page {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #f9a8d4 100%);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s, visibility 1s;
+        }
+        
+        .cover-page.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        
+        /* Intro Content */
+        .intro-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+        }
+        
+        .intro-hearts {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: heartBeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+        
+        .intro-title {
+            font-size: 48px;
+            font-weight: 200;
+            color: #ec4899;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .intro-subtitle {
+            font-size: 24px;
+            font-weight: 300;
+            color: #be185d;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        .intro-message {
+            font-size: 18px;
+            color: #831843;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            animation: fadeInUp 1.4s ease-out;
+        }
+        
+        .enter-button {
+            background: linear-gradient(135deg, #ec4899, #f472b6);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 10px 40px rgba(236, 72, 153, 0.5);
+            letter-spacing: 2px;
+            animation: fadeInUp 1.6s ease-out, pulse 2s ease-in-out infinite 2s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .enter-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .enter-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .enter-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(236, 72, 153, 0.7);
+        }
+        
+        .enter-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        .enter-button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Floating hearts in background */
+        .intro-bg-hearts {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .intro-bg-heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.2;
+            animation: floatUp 8s ease-in-out infinite;
+        }
+        
+        .intro-bg-heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .intro-bg-heart:nth-child(2) { left: 30%; animation-delay: 1s; }
+        .intro-bg-heart:nth-child(3) { left: 50%; animation-delay: 2s; }
+        .intro-bg-heart:nth-child(4) { left: 70%; animation-delay: 3s; }
+        .intro-bg-heart:nth-child(5) { left: 90%; animation-delay: 4s; }
+        
+        @keyframes floatUp {
+            0% {
+                bottom: -50px;
+                opacity: 0;
+                transform: translateX(0) rotate(0deg);
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+                transform: translateX(50px) rotate(180deg);
+            }
+        }
+    </style>
+</head>
+<body class="bg-pink-50 text-gray-800 overflow-x-hidden">
+    <!-- Cover Page - Intro Screen -->
+    <div id="coverPage" class="cover-page">
+        <!-- Background floating hearts -->
+        <div class="intro-bg-hearts">
+            <div class="intro-bg-heart">❤️</div>
+            <div class="intro-bg-heart">💕</div>
+            <div class="intro-bg-heart">💖</div>
+            <div class="intro-bg-heart">❤️</div>
+            <div class="intro-bg-heart">💗</div>
+        </div>
+        
+        <!-- Main content -->
+        <div class="intro-container">
+            <div class="intro-hearts">❤️ 💕 ❤️</div>
+            <h1 class="intro-title">NGÀY 20/10</h1>
+            <h2 class="intro-subtitle">Dành Tặng Em Yêu</h2>
+            <p class="intro-message">
+                Một trang web đặc biệt được tạo ra<br>
+                với tất cả tình yêu và sự trân trọng<br>
+                dành riêng cho em trong ngày hôm nay
+            </p>
+            <button class="enter-button" id="enterButton">
+                <span>✨ VÀO XEM NGAY ✨</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Page Loader -->
+    <div id="pageLoader" class="page-loader hidden">
+        <div class="loader-heart">❤️</div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-pink-100 z-50">
+        <div id="progressBar" class="h-full bg-pink-500 transition-all duration-300" style="width: 0%"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-sm z-40 border-b border-pink-100">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-xl font-light tracking-wider uppercase text-pink-600">20 / 10 ❤️</h1>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div class="max-w-4xl mx-auto text-center">
+            <div id="heroTitle" class="opacity-0 transform translate-y-8 transition-all duration-1000">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-extralight tracking-wider uppercase mb-8">
+                    Ngày Phụ Nữ<br>
+                    <span class="text-pink-500">❤️ Việt Nam ❤️</span>
+                </h2>
+            </div>
+            
+            <div id="heroSubtitle" class="opacity-0 transform translate-y-8 transition-all duration-1000 delay-300">
+                <p class="text-lg md:text-xl font-light tracking-wide text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    Dành tặng em yêu của anh<br>
+                    Người phụ nữ tuyệt vời nhất trong cuộc đời anh
+                </p>
+            </div>
+            
+            <div id="heroDate" class="opacity-0 transform translate-y-8 transition-all duration-1000 delay-500">
+                <div class="mt-16 inline-block">
+                    <div class="border-2 border-pink-400 px-8 py-4 bg-white/50">
+                        <p class="text-6xl font-extralight tracking-widest text-pink-600">20.10</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section - Lời Chúc -->
+    <section class="py-20 px-6">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-light tracking-wider uppercase mb-6 border-b-2 border-pink-400 inline-block pb-2 text-pink-600">
+                    ❤️ Lời Chúc ❤️
+                </h3>
+            </div>
+            
+            <div class="space-y-12">
+                <div class="scroll-reveal opacity-0 transform translate-y-8 transition-all duration-700">
+                    <p class="text-lg md:text-xl font-light leading-relaxed text-gray-700">
+                        Chúc mừng ngày 20/10, em yêu của anh. 
+                        Chúc em luôn tươi trẻ, xinh đẹp và hạnh phúc như chính bản thân em hiện tại.
+                    </p>
+                </div>
+                
+                <div class="scroll-reveal opacity-0 transform translate-y-8 transition-all duration-700">
+                    <p class="text-lg md:text-xl font-light leading-relaxed text-gray-700">
+                        Em là nguồn động lực, là ánh sáng và là niềm hạnh phúc lớn nhất của anh. 
+                        Cảm ơn em đã luôn ở bên, tỏa sáng và làm cuộc sống anh ý nghĩa hơn mỗi ngày.
+                    </p>
+                </div>
+                
+                <div class="scroll-reveal opacity-0 transform translate-y-8 transition-all duration-700">
+                    <p class="text-lg md:text-xl font-light leading-relaxed text-gray-700">
+                        Anh yêu em nhiều hơn những gì lời nói có thể diễn tả. 
+                        Chúc em một ngày 20/10 thật đặc biệt, và mãi là người phụ nữ tuyệt vời nhất trong lòng anh!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <h3 class="text-3xl md:text-4xl font-light tracking-wider uppercase mb-6 border-b-2 border-pink-400 inline-block pb-2 text-pink-600">
+                    ❤️ Câu Chuyện Của Chúng Mình ❤️
+                </h3>
+                <p class="text-base md:text-lg font-light text-pink-600 mt-4">Cuộn xuống để khám phá từng kỷ niệm</p>
+            </div>
+            
+            <div class="space-y-16 md:space-y-32">
+                <!-- Story Item 1 -->
+                <div class="story-item opacity-0 transform translate-y-16 transition-all duration-1000">
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-2 md:order-1">
+                            <h4 class="text-2xl md:text-3xl font-light tracking-wider uppercase mb-4 text-pink-600 border-l-4 border-pink-400 pl-4">❤️ Nụ Cười Của Em</h4>
+                            <p class="text-base md:text-lg font-light leading-relaxed text-gray-700">
+                                Những bông hoa tươi thắm này nhắc anh nhớ đến nụ cười của em. Mỗi cánh hoa như mỗi khoảnh khắc đẹp đẽ mà anh và em đã cùng trải qua. Em là bông hoa quý giá nhất trong vườn đời của anh.
+                            </p>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <div class="aspect-square bg-pink-50 overflow-hidden group relative">
+                                <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/20 transition-all duration-500 z-10"></div>
+                                <img src="Image/1.jpg" 
+                                     alt="Flowers" 
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Item 2 -->
+                <div class="story-item opacity-0 transform translate-y-16 transition-all duration-1000">
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-1">
+                            <div class="aspect-square bg-pink-50 overflow-hidden group relative">
+                                <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/20 transition-all duration-500 z-10"></div>
+                                <img src="Image/2.jpg" 
+                                     alt="Celebration" 
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="order-2">
+                            <h4 class="text-2xl md:text-3xl font-light tracking-wider uppercase mb-4 text-pink-600 border-l-4 border-pink-400 pl-4">❤️ Niềm Vui Mỗi Ngày</h4>
+                            <p class="text-base md:text-lg font-light leading-relaxed text-gray-700">
+                                Mỗi ngày bên em đều là một lễ hội, một niềm vui. Dù là những điều nhỏ nhặt nhất, khi có em bên cạnh, mọi thứ đều trở nên đặc biệt và đáng nhớ.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Item 3 -->
+                <div class="story-item opacity-0 transform translate-y-16 transition-all duration-1000">
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-2 md:order-1">
+                            <h4 class="text-2xl md:text-3xl font-light tracking-wider uppercase mb-4 text-pink-600 border-l-4 border-pink-400 pl-4">❤️ Hạnh Phúc Của Em</h4>
+                            <p class="text-base md:text-lg font-light leading-relaxed text-gray-700">
+                                Anh thích nhìn em cười, thích thấy em vui. Hạnh phúc của em chính là hạnh phúc của anh. Mỗi khi em cười, cả thế giới của anh đều sáng lên.
+                            </p>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <div class="aspect-square bg-pink-50 overflow-hidden group relative">
+                                <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/20 transition-all duration-500 z-10"></div>
+                                <img src="Image/3.jpg" 
+                                     alt="Joy" 
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Item 4 -->
+                <div class="story-item opacity-0 transform translate-y-16 transition-all duration-1000">
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-1">
+                            <div class="aspect-square bg-pink-50 overflow-hidden group relative">
+                                <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/20 transition-all duration-500 z-10"></div>
+                                <img src="Image/4.jpg" 
+                                     alt="Happiness" 
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="order-2">
+                            <h4 class="text-2xl md:text-3xl font-light tracking-wider uppercase mb-4 text-pink-600 border-l-4 border-pink-400 pl-4">❤️ Khoảnh Khắc Bên Nhau</h4>
+                            <p class="text-base md:text-lg font-light leading-relaxed text-gray-700">
+                                Những buổi chiều đi dạo cùng em, những lần nắm tay nhau và cùng nhau ngắm hoàng hôn. Đó là những kỷ niệm mà anh sẽ luôn trân trọng mãi trong tim.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Item 5 -->
+                <div class="story-item opacity-0 transform translate-y-16 transition-all duration-1000">
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-2 md:order-1">
+                            <h4 class="text-2xl md:text-3xl font-light tracking-wider uppercase mb-4 text-pink-600 border-l-4 border-pink-400 pl-4">❤️ Vẻ Đẹp Tự Nhiên</h4>
+                            <p class="text-base md:text-lg font-light leading-relaxed text-gray-700">
+                                Vẻ đẹp của em không chỉ nằm ở ngoại hình, mà còn ở trái tim nhân hậu và tâm hồn trong sáng của em. Em đẹp nhất khi em là chính mình.
+                            </p>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <div class="aspect-square bg-pink-50 overflow-hidden group relative">
+                                <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/20 transition-all duration-500 z-10"></div>
+                                <img src="Image/10.jpg" 
+                                     alt="Beauty" 
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Item 6 -->
+                <div class="story-item opacity-0 transform translate-y-16 transition-all duration-1000">
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-1">
+                            <div class="aspect-square bg-pink-50 overflow-hidden group relative">
+                                <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/20 transition-all duration-500 z-10"></div>
+                                <img src="Image/7.jpg" 
+                                     alt="Smile" 
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="order-2">
+                            <h4 class="text-2xl md:text-3xl font-light tracking-wider uppercase mb-4 text-pink-600 border-l-4 border-pink-400 pl-4">❤️ Tiếng Cười Của Em</h4>
+                            <p class="text-base md:text-lg font-light leading-relaxed text-gray-700">
+                                Tiếng cười của em là âm nhạc ngọt ngào nhất mà anh từng được nghe. Mỗi khi em cười, anh lại yêu em nhiều hơn một chút.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Item 7 -->
+                <div class="story-item opacity-0 transform translate-y-16 transition-all duration-1000">
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-2 md:order-1">
+                            <h4 class="text-2xl md:text-3xl font-light tracking-wider uppercase mb-4 text-pink-600 border-l-4 border-pink-400 pl-4">❤️ Sự Thanh Lịch</h4>
+                            <p class="text-base md:text-lg font-light leading-relaxed text-gray-700">
+                                Em thanh lịch, duyên dáng và luôn toát lên vẻ đẹp riêng biệt. Anh tự hào vì có một người phụ nữ tuyệt vời như em bên cạnh.
+                            </p>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <div class="aspect-square bg-pink-50 overflow-hidden group relative">
+                                <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/20 transition-all duration-500 z-10"></div>
+                                <img src="Image/8.jpg" 
+                                     alt="Elegance" 
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Story Item 8 -->
+                <div class="story-item opacity-0 transform translate-y-16 transition-all duration-1000">
+                    <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-1">
+                            <div class="aspect-square bg-pink-50 overflow-hidden group relative">
+                                <div class="absolute inset-0 bg-pink-400/0 group-hover:bg-pink-400/20 transition-all duration-500 z-10"></div>
+                                <img src="Image/9.jpg" 
+                                     alt="Grace" 
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                        </div>
+                        <div class="order-2">
+                            <h4 class="text-2xl md:text-3xl font-light tracking-wider uppercase mb-4 text-pink-600 border-l-4 border-pink-400 pl-4">❤️ Tình Yêu Vĩnh Cửu</h4>
+                            <p class="text-base md:text-lg font-light leading-relaxed text-gray-700">
+                                Mỗi ngày trôi qua, tình yêu của anh dành cho em lại càng sâu đậm hơn. Em là người anh muốn cùng nhau già đi, cùng nhau trải qua mọi khoảnh khắc trong cuộc đời.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-6 border-t border-pink-200">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-sm font-light tracking-widest uppercase text-pink-500">
+                ❤️ Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10 ❤️
+            </p>
+            <p class="text-xs font-light tracking-wider text-pink-400 mt-2">
+                © 2025 • Made With Love For You by ducthin ❤️❤️❤️
+            </p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div id="fabContainer" class="fixed bottom-8 right-8 z-40 opacity-0 invisible transition-all duration-500">
+        <div class="relative">
+            <!-- Label -->
+            <div class="absolute -top-12 right-0 bg-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg">
+                💌 Thông điệp dành cho em
+                <div class="absolute bottom-0 right-6 transform translate-y-1/2 rotate-45 w-3 h-3 bg-pink-500"></div>
+            </div>
+            <!-- Button -->
+            <button id="fabButton" class="w-20 h-20 bg-gradient-to-br from-pink-400 to-pink-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-8 left-8 w-14 h-14 bg-pink-400 text-white rounded-full shadow-lg opacity-0 invisible hover:bg-pink-500 transition-all duration-300 z-40 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <!-- Sidebar Drawer -->
+    <div id="sidebarDrawer" class="fixed inset-y-0 right-0 w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-500 z-50 overflow-y-auto">
+        <div class="p-8">
+            <!-- Close Button -->
+            <button id="closeDrawer" class="absolute top-6 right-6 text-gray-400 hover:text-gray-900 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Drawer Content -->
+            <div class="mt-12">
+                <h4 class="text-3xl font-light tracking-wider uppercase mb-8 border-b-2 border-pink-400 pb-4 text-pink-600">
+                    ❤️ Thông Điệp Đặc Biệt ❤️
+                </h4>
+                
+                <div class="space-y-6 text-gray-700">
+                    <p class="text-lg font-light leading-relaxed">
+                        Gửi em yêu của anh,
+                    </p>
+                    
+                    <p class="text-base font-light leading-relaxed">
+                        Trong ngày đặc biệt này, anh muốn gửi đến em những lời chúc chân thành nhất từ trái tim. 
+                        Em là nguồn cảm hứng, là sức mạnh, và là niềm hạnh phúc lớn nhất trong cuộc đời anh.
+                    </p>
+                    
+                    <p class="text-base font-light leading-relaxed">
+                        Cảm ơn em đã luôn ở bên anh, chia sẻ những niềm vui và cả những khó khăn. 
+                        Em làm cho cuộc sống của anh trở nên ý nghĩa và tràn đầy màu sắc hơn mỗi ngày.
+                    </p>
+                    
+                    <div class="bg-pink-50 border-l-4 border-pink-400 p-6 my-8">
+                        <p class="text-base font-medium italic text-pink-700">
+                            "❤️ Em là điều tuyệt vời nhất mà cuộc đời đã dành tặng cho anh. Anh yêu em vô cùng! ❤️"
+                        </p>
+                    </div>
+                    
+                    <p class="text-base font-light leading-relaxed">
+                        Chúc em một ngày 20/10 thật tràn đầy niềm vui, hạnh phúc và những điều kỳ diệu! 
+                        Anh sẽ luôn ở bên cạnh em, yêu thương và chăm sóc em mãi mãi.
+                    </p>
+                    
+                    <div class="mt-8 pt-6 border-t border-pink-200">
+                        <p class="text-sm font-light text-pink-500 text-right">
+                            Với tất cả tình yêu của anh ❤️❤️❤️
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black/30 backdrop-blur-sm opacity-0 invisible transition-all duration-300 z-40"></div>
+
+    <!-- Floating Hearts Container -->
+    <div id="heartsContainer" class="fixed inset-0 pointer-events-none z-[9999]"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
